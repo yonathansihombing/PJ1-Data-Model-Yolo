@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# Dataset besar / unduhan (dibuat ulang dengan prepare_dataset.py)
+datasets/coco_download/
+datasets/raw_yolo/
+datasets/reports/
+datasets/object_detection/images/*/*
+datasets/object_detection/labels/*/*
+datasets/object_detection/split_manifest.csv
+datasets/object_detection/split_summary.json
+datasets/object_detection/classes.txt
+!datasets/object_detection/images/*/.gitkeep
+!datasets/object_detection/labels/*/.gitkeep
+
+# Hasil training, bobot model, keluaran (besar)
+runs/*
+!runs/.gitkeep
+weights/*
+!weights/.gitkeep
+outputs/*
+!outputs/.gitkeep
+*.pt
+*.onnx
+
+# File sementara
+*.tmp
+.DS_Store
+Thumbs.db
+
+# CATATAN: camera_settings.json, camera_calibration.*, fields.json sengaja TIDAK diabaikan
+# (data kalibrasi/field Anda).

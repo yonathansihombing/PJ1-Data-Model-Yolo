@@ -1,0 +1,7 @@
+jenis,eksperimen,split,precision,recall,map50,map50_95,inference_ms,train_minutes,jumlah_gambar,jumlah_objek,catatan
+utama,E1,val,0.9690,0.9921,0.9950,0.8737,6.75,3.35,,,Dari output terminal pengguna; artefak run belum tersedia di ZIP
+utama,E2,val,0.3181,0.5675,0.3967,0.1289,24.18,3.11,,,Dari output terminal pengguna; scratch
+utama,E3,val,0.9690,0.9921,0.9950,0.8737,28.56,3.20,,,Dari output terminal pengguna; lr0 0.005 menurut konfigurasi utama
+final,E1,test,0.9282,0.9333,0.9700,0.9160,4.89,,9,9,Test dilakukan satu kali pada 2026-10-26 18:42:02
+fixed_lr,E1_fixed_lr,val,0.5802,0.2698,0.4286,0.4129,,,18,18,Eksperimen tambahan; AdamW lr0 0.01
+fixed_lr,E3_fixed_lr,val,0.5802,0.2698,0.4286,0.4129,,,18,18,Eksperimen tambahan; AdamW lr0 0.005

@@ -1,0 +1,152 @@
+{
+  "image_width": 640,
+  "image_height": 480,
+  "rms_error": 1.6221959244893756,
+  "mean_reprojection_error": 0.8057171106338501,
+  "num_samples": 30,
+  "board": {
+    "cols_inner_corners": 7,
+    "rows_inner_corners": 7,
+    "cols_squares": 8,
+    "rows_squares": 8,
+    "square_size_mm": 34.0
+  },
+  "camera_info": {
+    "name": "Webcam (index 1, DSHOW)",
+    "type": "webcam",
+    "index": 1,
+    "backend": "DSHOW",
+    "requested_width_height_fps": [
+      640,
+      480,
+      30
+    ],
+    "actual_width": 640,
+    "actual_height": 480,
+    "reported_fps": 30.00003000003,
+    "measured_fps": 14.652256530498326,
+    "fourcc": "YUY2",
+    "autofocus_reported": 2.0,
+    "focus_reported": 0.0,
+    "threaded_capture": true,
+    "camera_settings": {
+      "loaded_from_file": false,
+      "software": {
+        "brightness": 100,
+        "contrast": 100,
+        "gamma": 100,
+        "brightness_actual": 0,
+        "contrast_factor": 1.0,
+        "gamma_value": 1.0
+      },
+      "hardware": {
+        "auto_exposure": {
+          "label": "Auto Exposure",
+          "status": "NOT SET",
+          "requested": null,
+          "actual": null
+        },
+        "exposure": {
+          "label": "Exposure",
+          "status": "NOT SET",
+          "requested": null,
+          "actual": null
+        },
+        "gain": {
+          "label": "Gain",
+          "status": "NOT SET",
+          "requested": null,
+          "actual": null
+        },
+        "autofocus": {
+          "label": "Autofocus",
+          "status": "NOT SET",
+          "requested": null,
+          "actual": null
+        },
+        "focus": {
+          "label": "Focus",
+          "status": "NOT SET",
+          "requested": null,
+          "actual": null
+        },
+        "auto_wb": {
+          "label": "Auto White Balance",
+          "status": "NOT SET",
+          "requested": null,
+          "actual": null
+        },
+        "wb_temp": {
+          "label": "White Balance",
+          "status": "NOT SET",
+          "requested": null,
+          "actual": null
+        }
+      }
+    }
+  },
+  "created_at": "2026-10-21 17:55:15",
+  "per_view_errors": [
+    0.9726293087005615,
+    0.6269486546516418,
+    0.607717752456665,
+    0.4828929007053375,
+    0.5486520528793335,
+    1.2888256311416626,
+    0.7402644753456116,
+    0.6629050970077515,
+    0.6036708950996399,
+    0.6451700925827026,
+    0.7142238020896912,
+    1.2208894491195679,
+    0.6179628968238831,
+    0.5395715236663818,
+    0.8390470743179321,
+    0.9626688957214355,
+    1.7850713729858398,
+    0.7783591747283936,
+    0.8357203006744385,
+    0.7230725288391113,
+    1.7333136796951294,
+    0.7502051591873169,
+    0.6057610511779785,
+    0.6458487510681152,
+    0.8627143502235413,
+    0.544617772102356,
+    0.6379033327102661,
+    0.799513041973114,
+    0.6951044797897339,
+    0.7002687454223633
+  ],
+  "undistort_alpha": 0.0,
+  "opencv_version": "5.0.0",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "camera_matrix": [
+    [
+      493.40690401626097,
+      0.0,
+      314.81542634124344
+    ],
+    [
+      0.0,
+      494.44505030113936,
+      250.39845999087837
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "distortion_coefficients": [
+    0.12997444463430094,
+    -0.3056935323810493,
+    -0.00042733849048054976,
+    -0.0020423796882116534,
+    0.16543531317273372
+  ],
+  "fx": 493.40690401626097,
+  "fy": 494.44505030113936,
+  "cx": 314.81542634124344,
+  "cy": 250.39845999087837
+}

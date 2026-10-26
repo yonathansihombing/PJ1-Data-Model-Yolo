@@ -1,0 +1,17 @@
+# ==============================================================================
+# Dependensi project (tanpa penguncian versi: versi tidak diuji bersama di semua komputer).
+# URUTAN PEMASANGAN:
+#   1) (hanya untuk YOLO) pasang PyTorch DULU sesuai komputer Anda - lihat README bagian B / pytorch.org
+#   2) pip install -r requirements.txt
+# ==============================================================================
+
+# --- fitur kamera/vision lama (menu 1-5) ---
+numpy
+opencv-python
+
+# --- fitur YOLO (menu 6, prepare_dataset.py, train_yolo.py, evaluate_yolo.py) ---
+PyYAML          # membaca configs/*.yaml
+ultralytics     # YOLO; juga memasang dependensi seperti matplotlib/pandas untuk grafik hasil training
+
+# --- opsional ---
+# pyrealsense2  # hanya bila memakai Intel RealSense (python main.py --source realsense)

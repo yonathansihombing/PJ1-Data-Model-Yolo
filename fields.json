@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "saved_at": "2026-10-19 20:29:28",
+  "coordinate_mode": "pixel",
+  "image_space": "undistorted",
+  "frame_size": [640, 480],
+  "fields": [
+    {
+      "id": 1,
+      "polygon": [[0.0, 117.0], [639.0, 117.0], [639.0, 479.0], [-0.0, 479.0]],
+      "active": true,
+      "ignore_colors": []
+    }
+  ]
+}
