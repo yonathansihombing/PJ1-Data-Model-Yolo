@@ -1,0 +1,6 @@
+checkpoint: runs/e1_pretrained/weights/best.pt
+conf: 0.25
+iou: 0.45
+imgsz: 640
+device: null
+max_det: 100

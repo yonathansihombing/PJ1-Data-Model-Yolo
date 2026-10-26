@@ -1,0 +1,6 @@
+extends: e1_pretrained.yaml
+name: e3_finetuning
+description: 'E3 - baseline E1 dengan satu perubahan hyperparameter: learning rate
+  awal lr0 dari 0.01 menjadi 0.005.'
+train:
+  lr0: 0.005

@@ -1,0 +1,32 @@
+name: e1_fixed_lr
+description: E1 pembanding dengan pretrained YOLO26n dan learning rate tetap 0.01.
+model: yolo26n.pt
+pretrained: true
+data: configs/data.yaml
+train:
+  epochs: 50
+  imgsz: 640
+  batch: 8
+  seed: 42
+  workers: 4
+  device: null
+  patience: 15
+  optimizer: AdamW
+  lr0: 0.01
+  lrf: 0.01
+  momentum: 0.937
+  weight_decay: 0.0005
+  warmup_epochs: 3.0
+  hsv_h: 0.015
+  hsv_s: 0.7
+  hsv_v: 0.4
+  degrees: 0.0
+  translate: 0.1
+  scale: 0.5
+  fliplr: 0.5
+  flipud: 0.0
+  mosaic: 1.0
+  close_mosaic: 10
+  plots: true
+  save: true
+  val: true
