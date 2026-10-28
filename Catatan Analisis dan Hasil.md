@@ -35,18 +35,4 @@ Kelas `box_hitam` menjadi prioritas perbaikan karena metrik per kelas paling ren
 
 ## Eksperimen fixed-LR tambahan
 E1 fixed-LR (`AdamW`, lr0 0.01) dan E3 fixed-LR (`AdamW`, lr0 0.005) sama-sama menghasilkan validation P=0.5802, R=0.2698, mAP50=0.4286, mAP50–95=0.4129. Kedua run ini berbeda dari eksperimen utama dan harus dilaporkan sebagai eksperimen tambahan, tidak menggantikan hasil E1/E3 utama.
-
-## Integritas test set
-Final test telah dijalankan sekali pada 2026-10-26 18:42:02, dengan E1 dipilih manual melalui `--select E1`. Jangan jalankan ulang `--force-retest` dan jangan menggunakan hasil test untuk tuning/pemilihan model.
-
-## Keterbatasan dan item yang belum diverifikasi
-1. Dataset dan label aktual tidak terdapat di ZIP audit, sehingga jumlah 90 gambar (63 train, 18 val, 9 test) belum diverifikasi dari file aktual pada tahap ini.
-2. Artefak asli `runs/e1_pretrained/` dan `runs/e3_finetuning/` termasuk `results.png`, `results.csv`, `best.pt`, `last.pt`, dan `args.yaml` belum tersedia di ZIP.
-3. PPT dosen dan gambar tabel pengumpulan belum ditemukan di berkas yang tersedia untuk audit ini; ketentuan teknis di luar informasi yang diberikan belum bisa dicocokkan.
-4. Belum ada validasi round-trip YOLO↔COCO yang dapat dibuktikan dari ZIP.
-
-## Cara menjalankan (tanpa mengulang training)
-- Evaluasi validation (aman untuk pemilihan, tidak menggunakan test): `py evaluate_yolo.py`
-- Final test **jangan dijalankan lagi** karena hasil test sudah tercatat.
-
-Untuk membuat paket final benar-benar siap dikumpulkan, gabungkan dataset dan artefak run asli dari komputer lokal ke paket pengumpulan setelah diverifikasi. Jangan membuat ulang `results.png` dari angka ringkasan atau mengarang artefak training.
+um ada validasi round-trip YOLO↔COCO yang dapat dibuktikan dari ZIP.
