@@ -1,20 +1,14 @@
-# YOLO Object Detection — Dataset, Training, dan Evaluasi Model
+# YOLO Object Detection — Dataset, Training, dan Evaluasi
 
-Repository ini berisi dataset, konfigurasi, hasil eksperimen, dan bobot model YOLO untuk proyek deteksi objek. Repository disusun agar proses pengumpulan data, persiapan dataset, pelatihan model, dan evaluasi dapat didokumentasikan serta digunakan kembali.
+## 1. Ruang lingkup
 
-## 1. Tujuan Proyek
+Repositori ini menggabungkan modul kamera, pengelolaan anotasi, pipeline object detection YOLO, eksperimen training, dan evaluasi. Pipeline deteksi utama menggunakan konfigurasi eksperimen YOLO26n. Modul segmentation merupakan jalur terpisah dan tidak boleh dianggap sebagai hasil eksperimen object detection.
 
-Proyek ini bertujuan untuk:
+Dokumentasi ini menjelaskan alur berdasarkan berkas yang ada di repositori. Hasil training yang sudah tersimpan tidak otomatis membuktikan bahwa eksperimen dapat diulang pada komputer lain; dependensi, dataset, checkpoint, dan perangkat keras tetap perlu diperiksa.
 
-- Menyiapkan dataset gambar beserta anotasi objek dalam format YOLO.
-- Membagi dataset menjadi data training, validation, dan testing.
-- Melakukan eksperimen pelatihan model YOLO dengan beberapa konfigurasi.
-- Mengevaluasi performa model berdasarkan hasil pengujian.
-- Menyimpan bobot model terbaik untuk digunakan pada proses inferensi atau deteksi objek.
+## 2. Kelas dan format anotasi
 
-## 2. Kelas Objek
-
-Berdasarkan konfigurasi dataset yang digunakan, kelas objek terdiri atas:
+Konfigurasi dataset saat ini menetapkan kelas berikut:
 
 | ID | Nama kelas |
 |---:|---|
@@ -22,243 +16,206 @@ Berdasarkan konfigurasi dataset yang digunakan, kelas objek terdiri atas:
 | 1 | `box_hitam` |
 | 2 | `box_putih` |
 
-ID kelas pada anotasi harus sesuai dengan urutan kelas pada `configs/data.yaml`.
+Sumber nama kelas untuk konversi polygon adalah `datasets/raw_yolo/classes.txt`. Skrip `prepare_polygon_detection.py` akan membangun ulang `configs/data.yaml` dari daftar tersebut ketika proses persiapan berhasil. Jangan mengubah urutan kelas setelah anotasi dibuat tanpa memeriksa dan memperbarui seluruh label.
 
-**Catatan:** Setiap gambar harus memiliki anotasi yang sesuai dengan objek sebenarnya. Jika kelas atau anotasi diubah, dataset perlu divalidasi kembali sebelum training.
+Repositori menggunakan dua format anotasi yang berbeda:
 
-## 3. Struktur Repository
+- **Segmentation polygon:** file di `datasets/raw_yolo/labels_seg/`; berisi ID kelas dan titik polygon yang dinormalisasi.
+- **Object detection:** file YOLO berisi `class_id x_center y_center width height`; disimpan pada `datasets/object_detection/labels/{train,val,test}/`.
 
-```text
-PJ1-Data-Model-Yolo/
-│
-├── README.md
-├── .gitignore
-│
-├── configs/
-│   ├── data.yaml
-│   └── ... konfigurasi eksperimen
-│
-├── datasets/
-│   ├── raw_yolo/
-│   │   ├── classes.txt
-│   │   ├── images/
-│   │   └── labels_seg/
-│   │
-│   ├── object_detection/
-│   │   ├── images/
-│   │   │   ├── train/
-│   │   │   ├── val/
-│   │   │   └── test/
-│   │   ├── labels/
-│   │   │   ├── train/
-│   │   │   ├── val/
-│   │   │   └── test/
-│   │   └── split_summary.json
-│   │
-│   └── reports/
-│
-└── runs/
-    ├── e1_pretrained/
-    ├── e2_scratch/
-    ├── e3_finetuning/
-    ├── e1_fixed_lr/
-    ├── e3_fixed_lr/
-    └── _evaluation/
+Konversi polygon menjadi object detection menghasilkan kotak pembatas sumbu-sejajar (*axis-aligned bounding box*, AABB). Bentuk polygon asli tidak disimpan sebagai bentuk kotak yang diputar. Skrip konversi tidak mengubah label polygon sumber.
+
+## 3. Struktur utama
+
+- `configs/`: konfigurasi dataset, training, dan inference.
+- `datasets/raw_yolo/`: gambar sumber, `classes.txt`, dan anotasi polygon.
+- `datasets/object_detection/`: dataset deteksi yang sudah dibagi menjadi train, validation, dan test.
+- `datasets/reports/`: laporan pemeriksaan dataset jika dibuat oleh pipeline.
+- `runs/`: hasil training dan evaluasi, termasuk metrik serta checkpoint.
+- `segment/`: hasil training segmentation yang tersimpan.
+- `main.py`: menu utama aplikasi kamera.
+- `dataset_workflow.py`: pengelolaan kelas, anotasi, dan review label.
+- `prepare_polygon_detection.py`: konversi polygon ke kotak deteksi dan pembagian dataset.
+- `prepare_dataset.py`: utilitas dataset, termasuk pemeriksaan, split, dan konversi COCO.
+- `train_yolo.py` dan `evaluate_yolo.py`: eksperimen object detection dan evaluasi.
+- `train_segmentation.py`: training segmentation dengan konfigurasi dataset segmentation yang terpisah.
+
+Sebagian direktori berisi artefak hasil yang dihasilkan saat program dijalankan. Isi direktori tersebut dapat berbeda pada checkout baru.
+
+## 4. Persiapan lingkungan Windows
+
+Jalankan perintah dari direktori repositori. Pastikan Python yang dipakai adalah versi yang didukung oleh versi PyTorch dan Ultralytics yang dipilih.
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
 ```
 
-Struktur di atas merupakan gambaran folder utama yang digunakan dalam proyek. File tambahan dapat tersedia sesuai hasil eksperimen dan pembaruan dataset.
-
-## 4. Fungsi Setiap Folder
-
-### `configs/`
-
-Berisi konfigurasi dataset dan eksperimen training. File `data.yaml` digunakan untuk menentukan lokasi dataset, direktori training, validation, testing, serta nama kelas.
-
-### `datasets/raw_yolo/`
-
-Berisi data mentah yang menjadi sumber dataset. Folder ini digunakan untuk menyimpan gambar dan anotasi sebelum atau selama proses persiapan dataset.
-
-Data mentah sebaiknya dipertahankan agar gambar dapat diperiksa, anotasi diperbaiki, dan dataset diperbarui tanpa harus mengumpulkan ulang semua data.
-
-### `datasets/object_detection/`
-
-Berisi dataset yang telah disiapkan untuk pelatihan model. Data dibagi menjadi:
-
-- **Train:** digunakan untuk melatih model.
-- **Validation:** digunakan untuk memantau performa selama pengembangan model.
-- **Test:** digunakan untuk mengevaluasi model pada data pengujian.
-
-Gambar dan file anotasi harus memiliki pasangan nama file yang sesuai.
-
-### `datasets/reports/`
-
-Berisi laporan pemeriksaan dataset, termasuk hasil validasi data yang tersedia.
-
-### `runs/`
-
-Berisi hasil eksperimen training, metrik, grafik, file pendukung evaluasi, dan bobot model yang dihasilkan.
-
-## 5. Format Dataset YOLO
-
-Anotasi object detection YOLO disimpan dalam file `.txt`, dengan satu baris untuk setiap objek:
-
-```text
-class_id x_center y_center width height
-```
-
-Koordinat posisi dan ukuran kotak pembatas dinormalisasi terhadap ukuran gambar, sehingga nilainya berada pada rentang 0 sampai 1.
-
-Contoh format:
-
-```text
-1 0.500000 0.450000 0.300000 0.250000
-```
-
-Contoh tersebut hanya menunjukkan format anotasi, bukan anotasi aktual dari gambar dalam dataset.
-
-Pastikan bahwa:
-
-1. Setiap ID kelas sesuai dengan `data.yaml`.
-2. Koordinat anotasi berada pada rentang yang valid.
-3. Nama file gambar dan label cocok.
-4. Objek yang terlihat pada gambar telah diberi anotasi sesuai kebutuhan.
-5. Data testing tidak digunakan sebagai data training.
-
-## 6. Konfigurasi Dataset
-
-Contoh konfigurasi `configs/data.yaml`:
-
-```yaml
-path: datasets/object_detection
-train: images/train
-val: images/val
-test: images/test
-
-names:
-  0: field
-  1: box_hitam
-  2: box_putih
-```
-
-Path dataset dibuat relatif terhadap repository agar lebih mudah digunakan di komputer lain.
-
-Jika direktori dataset dipindahkan atau nama kelas berubah, konfigurasi harus diperiksa dan disesuaikan sebelum training.
-
-## 7. Eksperimen Training
-
-Repository menyimpan hasil beberapa eksperimen:
-
-| Eksperimen | Tujuan |
-|---|---|
-| `e1_pretrained` | Training menggunakan model pretrained |
-| `e2_scratch` | Training dari konfigurasi model tanpa pretrained |
-| `e3_finetuning` | Eksperimen fine-tuning dengan konfigurasi yang disiapkan |
-| `e1_fixed_lr` | Eksperimen tambahan dengan pengaturan learning rate tetap |
-| `e3_fixed_lr` | Eksperimen tambahan dengan pengaturan learning rate tetap |
-
-Hasil setiap eksperimen dapat mencakup bobot model, metrik, grafik, dan file pendukung lainnya, bergantung pada hasil yang tersimpan.
-
-Perbandingan model sebaiknya mempertimbangkan precision, recall, mAP50, mAP50-95, serta hasil pengujian pada data test. Model terbaik tidak ditentukan hanya berdasarkan nama eksperimen atau ukuran file bobot.
-
-## 8. Instalasi Lingkungan
-
-Gunakan Python dan lingkungan virtual yang kompatibel dengan versi Ultralytics, PyTorch, serta perangkat keras yang digunakan.
-
-Contoh langkah instalasi pada Windows:
+Jika PowerShell menolak aktivasi skrip, gunakan Command Prompt:
 
 ```bat
-python -m venv .venv
-.venv\Scripts\activate
-python -m pip install --upgrade pip
-pip install ultralytics pyyaml
+.venv\Scripts\activate.bat
 ```
 
-Instalasi PyTorch perlu disesuaikan dengan dukungan CPU atau GPU pada komputer yang digunakan. Untuk penggunaan GPU NVIDIA, periksa kompatibilitas versi PyTorch dan CUDA sebelum memulai training.
+### Instalasi PyTorch untuk CPU atau GPU
 
-## 9. Training Model
+Pasang PyTorch **sebelum** memasang seluruh dependensi proyek. Pilih perintah sesuai sistem operasi, versi Python, dan perangkat dari pemilih resmi: https://pytorch.org/get-started/locally/
 
-Perintah training dapat dijalankan menggunakan Ultralytics YOLO. Contoh berikut merupakan pola perintah dasar; nama model dan parameter harus disesuaikan dengan konfigurasi eksperimen yang ingin dijalankan.
+Untuk GPU NVIDIA, gunakan paket PyTorch dengan runtime CUDA yang didukung oleh instalasi PyTorch tersebut. Toolkit CUDA yang terpasang secara terpisah tidak otomatis menjamin PyTorch dapat menggunakan GPU.
 
-```python
-from ultralytics import YOLO
+Verifikasi instalasi:
 
-model = YOLO("yolo26n.pt")
-
-model.train(
-    data="configs/data.yaml",
-    epochs=30,
-    imgsz=416,
-    batch=16
-)
+```powershell
+python -c "import torch; print('PyTorch:', torch.__version__); print('CUDA tersedia:', torch.cuda.is_available()); print('GPU:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'tidak tersedia')"
 ```
 
-Perintah tersebut merupakan contoh training dasar, bukan jaminan bahwa seluruh parameter sama dengan eksperimen yang tersimpan dalam repository.
+Jika `CUDA tersedia: False`, training masih dapat berjalan di CPU, tetapi biasanya lebih lambat. Periksa kompatibilitas driver NVIDIA, paket PyTorch, dan versi Python sebelum mencoba memasang ulang.
 
-Untuk mereproduksi eksperimen tertentu, gunakan konfigurasi eksperimen yang sesuai dan periksa nilai model, pretrained, epochs, image size, batch size, seed, serta parameter lainnya.
+### Instal dependensi proyek
 
-## 10. Evaluasi Model
+```powershell
+python -m pip install -r requirements.txt
+```
 
-Evaluasi dilakukan menggunakan data test yang terpisah dari data training.
+Verifikasi paket utama:
 
-Contoh evaluasi menggunakan bobot model:
+```powershell
+python -c "import cv2, yaml, ultralytics; print('OpenCV:', cv2.__version__); print('Ultralytics:', ultralytics.__version__)"
+```
+
+File `requirements.txt` tidak mengunci versi paket. Karena itu, hasil instalasi dapat berbeda antarwaktu dan komputer. Untuk laporan yang dapat direproduksi, catat versi Python, PyTorch, CUDA yang dilaporkan PyTorch, OpenCV, dan Ultralytics.
+
+## 5. Periksa dataset sumber
+
+Pastikan folder dan berkas berikut tersedia:
+
+- `datasets/raw_yolo/images/`
+- `datasets/raw_yolo/labels_seg/`
+- `datasets/raw_yolo/classes.txt`
+
+Tinjau gambar dan label sebelum membuat split. Setiap anotasi harus cocok dengan objek pada gambar. Label usulan dari auto-labeling harus direview sebelum diperlakukan sebagai label final. Hindari gambar yang sama atau hampir sama tersebar di split yang berbeda.
+
+## 6. Konversi polygon dan split dataset deteksi
+
+Sebelum menjalankan konversi, pastikan dataset sumber sudah dicadangkan. Jalankan:
+
+```powershell
+python prepare_polygon_detection.py
+```
+
+Skrip mengonversi polygon menjadi kotak AABB, membagi dataset ke train/validation/test dengan seed bawaan 42, dan memperbarui `configs/data.yaml`. Hasil ditulis ke `datasets/object_detection/`.
+
+Jika keluaran lama sudah ada, jangan menimpanya sebelum memastikan hasil tersebut tidak diperlukan. Opsi `--overwrite` mengizinkan pembuatan ulang keluaran:
+
+```powershell
+python prepare_polygon_detection.py --overwrite
+```
+
+Opsi tersebut dapat mengganti hasil dataset deteksi sebelumnya. Gunakan hanya setelah membuat cadangan jika data lama perlu dipertahankan.
+
+## 7. Eksperimen object detection
+
+Konfigurasi utama:
+
+| Eksperimen | Model awal | Tujuan |
+|---|---|---|
+| E1 — `e1_pretrained` | `yolo26n.pt` | Baseline dengan bobot pretrained |
+| E2 — `e2_scratch` | `yolo26n.yaml` | Inisialisasi dari arsitektur tanpa bobot pretrained |
+| E3 — `e3_finetuning` | Mewarisi E1 | Mengubah hanya `train.lr0` dari 0.01 menjadi 0.005 |
+
+Parameter training E1 dan E2 didefinisikan pada berkas YAML masing-masing. E3 mewarisi E1 sehingga perubahan yang dimaksud hanya learning rate awal. Periksa konfigurasi efektif sebelum membandingkan hasil.
+
+Periksa konfigurasi dan kesiapan dataset tanpa training:
+
+```powershell
+python train_yolo.py --exp e1 --dry-run
+python train_yolo.py --exp e2 --dry-run
+python train_yolo.py --exp e3 --dry-run
+```
+
+Jalankan eksperimen satu per satu:
+
+```powershell
+python train_yolo.py --exp e1 --allow-download
+python train_yolo.py --exp e2
+python train_yolo.py --exp e3
+```
+
+Opsi `--allow-download` mengizinkan pengunduhan bobot pretrained bila diperlukan. Periksa bantuan skrip dengan `python train_yolo.py --help` jika opsi atau konfigurasi berubah. Skrip menolak penggunaan ulang nama hasil yang sudah ada kecuali opsi penimpaan yang disediakan digunakan. Training menggunakan train dan validation; test tidak dipakai untuk memilih bobot selama proses training.
+
+Hasil disimpan di `runs/<nama_eksperimen>/`, termasuk `weights/best.pt`, `weights/last.pt`, `results.csv`, grafik, dan metadata bila proses selesai.
+
+## 8. Evaluasi model
+
+Jalankan evaluasi validation untuk membandingkan eksperimen:
+
+```powershell
+python evaluate_yolo.py
+```
+
+Gunakan hasil validation untuk memilih model. Jalankan final test setelah model final dipilih, sesuai opsi yang didukung skrip:
+
+```powershell
+python evaluate_yolo.py --final-test
+```
+
+Skrip menolak pengujian final berulang kecuali `--force-retest` digunakan. Jangan menggunakan hasil test berulang untuk memilih model karena hal itu mengubah fungsi test set sebagai evaluasi akhir. Periksa `python evaluate_yolo.py --help` untuk parameter pemilihan model yang tersedia pada versi kode saat ini.
+
+Metrik yang dilaporkan meliputi precision, recall, mAP50, mAP50–95, waktu inferensi, serta hasil per kelas jika artefaknya tersedia. Jangan mengisi metrik yang belum dihasilkan program.
+
+## 9. Inferensi melalui aplikasi kamera
+
+Jalankan menu utama:
+
+```powershell
+python main.py
+```
+
+Menu yang berkaitan dengan YOLO pada kode saat ini meliputi:
+
+- **[6]** YOLO Object Detection.
+- **[7]** Capture gambar dataset dari kamera.
+- **[8]** Training / Transfer Learning YOLO.
+- **[9]** Pengelolaan dataset, kelas, anotasi, dan auto-labeling.
+- **[10]** Evaluasi validation dan perbandingan E1/E2/E3.
+- **[11]** Final test.
+- **[12]** Pembuatan laporan TXT/CSV/README dari hasil yang tersedia.
+
+Ikuti petunjuk di terminal untuk setiap menu. Pastikan checkpoint yang dipilih memang hasil training untuk kelas yang dimaksud. Hasil YOLO berupa kotak dalam koordinat piksel; koordinat tersebut bukan ukuran dunia nyata atau milimeter.
+
+Untuk inferensi gambar secara langsung menggunakan Ultralytics, contoh berikut dapat dipakai di luar menu aplikasi setelah checkpoint tersedia:
 
 ```python
 from ultralytics import YOLO
 
 model = YOLO("runs/e1_pretrained/weights/best.pt")
-
-metrics = model.val(
-    data="configs/data.yaml",
-    split="test"
-)
-
-print(metrics)
+results = model.predict(source="gambar_uji.jpg", conf=0.25, save=True)
 ```
 
-Sesuaikan path bobot dengan eksperimen yang akan diuji. Pastikan model yang dipilih memiliki kelas yang sama dengan konfigurasi dataset.
+Ganti path checkpoint dan gambar sesuai berkas yang tersedia. Contoh ini tidak menggantikan pipeline eksperimen yang mencatat konfigurasi dan metadata.
 
-Hasil evaluasi perlu digunakan untuk mengetahui kemampuan model mendeteksi objek, kesalahan klasifikasi, objek yang terlewat, dan kemungkinan deteksi palsu.
+## 10. Jalur segmentation
 
-## 11. Menggunakan Bobot Model
+`train_segmentation.py` adalah jalur terpisah dari E1/E2/E3 object detection. Skrip ini secara default mencari `datasets/segmentation/data.yaml` dan menggunakan `yolo11n-seg.pt`. Pastikan konfigurasi dataset segmentation benar-benar tersedia sebelum menjalankannya:
 
-File `best.pt` merupakan bobot model yang dipilih berdasarkan hasil validasi selama training. File tersebut dapat digunakan untuk inferensi.
-
-Contoh deteksi pada gambar:
-
-```python
-from ultralytics import YOLO
-
-model = YOLO("runs/e1_pretrained/weights/best.pt")
-
-results = model.predict(
-    source="contoh_gambar.jpg",
-    conf=0.25,
-    save=True
-)
+```powershell
+python train_segmentation.py --help
 ```
 
-Ganti `contoh_gambar.jpg` dengan path gambar yang akan diuji. Ganti path checkpoint jika menggunakan model dari eksperimen lain.
+Jangan menganggap konfigurasi segmentation tersedia hanya karena folder hasil training segmentation ada di repositori. Periksa file konfigurasi sumber dan label polygon sebelum menjalankan ulang training.
 
-Sebelum digunakan, periksa nama kelas yang tersimpan dalam checkpoint untuk memastikan model mendukung kelas `field`, `box_hitam`, dan `box_putih` sesuai kebutuhan.
+## 11. Troubleshooting
 
-## 12. Praktik Pengelolaan Dataset
+- **PyTorch tidak menemukan GPU:** periksa `torch.cuda.is_available()`, driver NVIDIA, kompatibilitas paket PyTorch, dan versi Python.
+- **Modul tidak ditemukan:** aktifkan virtual environment yang benar, lalu jalankan `python -m pip install -r requirements.txt`.
+- **Dataset atau label tidak ditemukan:** periksa nama folder, `classes.txt`, pasangan gambar-label, dan path di `configs/data.yaml`.
+- **Checkpoint tidak ditemukan:** periksa folder `runs/` dan pastikan training berhasil menyimpan `weights/best.pt`.
+- **Kelas model tidak sesuai:** periksa nama kelas yang tersimpan dalam checkpoint dan samakan dengan konfigurasi dataset yang dipakai.
+- **Hasil evaluasi berbeda:** catat versi dependensi, konfigurasi efektif, seed, isi dataset, dan checkpoint. Perbedaan lingkungan dapat memengaruhi hasil.
 
-- Simpan data mentah secara terpisah dari dataset hasil pembagian.
-- Periksa anotasi sebelum memasukkan gambar ke proses training.
-- Gunakan pembagian train, validation, dan test yang jelas.
-- Hindari gambar duplikat atau gambar yang hampir identik tersebar di beberapa split, karena dapat membuat evaluasi terlalu optimistis.
-- Catat konfigurasi setiap eksperimen agar hasilnya dapat dibandingkan.
-- Jangan memasukkan path absolut komputer pribadi ke file konfigurasi yang akan dibagikan.
-- Simpan bobot model yang diperlukan dan hindari mengunggah checkpoint yang tidak dibutuhkan.
+## 12. Batas interpretasi hasil
 
-## 13. Batasan dan Pengembangan Selanjutnya
+Metrik tinggi pada dataset kecil tidak menjamin model akan bekerja sama baiknya pada kondisi baru. Evaluasi perlu mempertimbangkan jumlah gambar, variasi sudut, pencahayaan, latar belakang, kualitas anotasi, distribusi kelas, dan potensi kemiripan antara gambar train dan test.
 
-Performa model bergantung pada kualitas dan jumlah data, variasi pencahayaan, sudut kamera, kondisi latar belakang, serta ketepatan anotasi.
-
-Pengembangan selanjutnya dapat mencakup penambahan variasi gambar untuk setiap kelas, pemeriksaan kualitas anotasi, evaluasi model secara konsisten, serta pengujian deteksi menggunakan kamera secara langsung.
-
-## 14. Catatan Repository
-
-Repository ini berfungsi sebagai dokumentasi dataset, konfigurasi, dan hasil eksperimen. Perintah dan path yang digunakan perlu diperiksa kembali sesuai file aktual yang tersedia sebelum menjalankan training atau evaluasi.
-
-**Tujuan akhir:** menyediakan alur kerja yang terdokumentasi untuk menyiapkan dataset, melatih model YOLO, membandingkan hasil eksperimen, dan menggunakan model untuk deteksi objek.
+Laporan harus membedakan hasil eksperimen utama dari eksperimen tambahan. Angka dari log lama tidak boleh dianggap sebagai hasil eksekusi ulang. Jika data atau log tidak tersedia untuk diverifikasi, nyatakan keterbatasan tersebut secara eksplisit.
