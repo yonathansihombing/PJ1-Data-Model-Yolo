@@ -6,7 +6,8 @@ venv/
 env/
 .pytest_cache/
 
-# Dataset besar / unduhan (dibuat ulang dengan prepare_dataset.py)
+# Dataset besar / data lokal. File di bawah sengaja tidak ikut Git secara default.
+# Jika memang perlu versioning dataset kecil, tinjau ukuran/lisensi lalu tambahkan secara eksplisit (git add -f) atau ubah aturan ini.
 datasets/coco_download/
 datasets/raw_yolo/
 datasets/reports/
