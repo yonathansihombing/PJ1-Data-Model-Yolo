@@ -1,0 +1,2 @@
+selected,precision,recall,map50,map50_95,inference_ms,timestamp
+E1,0.9282,0.9333,0.97,0.916,4.89,2026-10-26 18:42:02

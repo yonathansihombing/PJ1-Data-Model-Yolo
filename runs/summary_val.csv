@@ -1,0 +1,4 @@
+experiment,run_name,status,model,pretrained,changed_vs_e1,imgsz,epochs,batch,seed,precision,recall,map50,map50_95,inference_ms,train_minutes,weights,missing_artifacts
+E1,e1_pretrained,OK,yolo26n.pt,True,-,640,50,8,42,0.969,0.9921,0.995,0.8737,6.75,3.35,C:\Users\hp\Downloads\camera\runs\e1_pretrained\weights\best.pt,
+E2,e2_scratch,OK,yolo26n.yaml,False,model: yolo26n.pt -> yolo26n.yaml; pretrained: True -> False,640,50,8,42,0.3181,0.5675,0.3967,0.1289,24.18,3.11,C:\Users\hp\Downloads\camera\runs\e2_scratch\weights\best.pt,
+E3,e3_finetuning,OK,yolo26n.pt,True,train.lr0: 0.01 -> 0.005,640,50,8,42,0.969,0.9921,0.995,0.8737,28.56,3.2,C:\Users\hp\Downloads\camera\runs\e3_finetuning\weights\best.pt,
