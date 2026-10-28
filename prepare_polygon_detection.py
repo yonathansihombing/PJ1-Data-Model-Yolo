@@ -14,7 +14,7 @@ This does NOT change or overwrite the original polygon labels. Each polygon beco
 axis-aligned bounding box, formatted as `class_id cx cy w h`, normalized to [0,1].
 """
 from __future__ import annotations
-import argparse, json, random, shutil, sys
+import argparse, hashlib, json, random, re, shutil, sys
 from pathlib import Path
 from collections import Counter
 import cv2
@@ -75,6 +75,7 @@ def main():
     ap.add_argument('--src',type=Path,default=RAW); ap.add_argument('--dst',type=Path,default=OUT)
     ap.add_argument('--ratios',nargs=3,type=float,default=[.7,.2,.1],metavar=('TRAIN','VAL','TEST'))
     ap.add_argument('--seed',type=int,default=42); ap.add_argument('--overwrite',action='store_true')
+    ap.add_argument('--group-regex', default=None, help='regex nama file untuk mengelompokkan frame dari adegan/video yang sama')
     ap.add_argument('--allow-unlabeled',action='store_true',help='izinkan gambar tanpa polygon; label detection kosong')
     args=ap.parse_args()
     src=args.src.resolve(); dst=args.dst.resolve()
@@ -105,11 +106,40 @@ def main():
         for e in errors[:60]: print(' -',e)
         if len(errors)>60: print(f' ... dan {len(errors)-60} masalah lainnya')
         return 2
-    rng=random.Random(args.seed); rng.shuffle(records)
-    n=len(records); ntr=round(n*args.ratios[0]); nval=round(n*args.ratios[1]);
-    if n>=3:
-        ntr=max(1,min(n-2,ntr)); nval=max(1,min(n-ntr-1,nval))
-    splits={'train':records[:ntr],'val':records[ntr:ntr+nval],'test':records[ntr+nval:]}
+    # Gabungkan gambar identik (hash sama) dan frame dari grup yang sama.
+    parent=list(range(len(records)))
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+    def union(a,b):
+        ra,rb=find(a),find(b)
+        if ra != rb: parent[max(ra,rb)] = min(ra,rb)
+    by_hash={}; by_group={}
+    rx=re.compile(args.group_regex) if args.group_regex else None
+    for i,(img,_) in enumerate(records):
+        digest=hashlib.md5(img.read_bytes()).hexdigest()
+        if digest in by_hash: union(i,by_hash[digest])
+        else: by_hash[digest]=i
+        if rx:
+            match=rx.search(img.stem)
+            if match:
+                group=match.group(1) if match.groups() else match.group(0)
+                if group in by_group: union(i,by_group[group])
+                else: by_group[group]=i
+    grouped={}
+    for i in range(len(records)): grouped.setdefault(find(i),[]).append(i)
+    groups=list(grouped.values())
+    random.Random(args.seed).shuffle(groups)
+    n=len(records); target={s:r*n for s,r in zip(('train','val','test'),args.ratios)}
+    assigned={'train':[],'val':[],'test':[]}
+    for group in groups:
+        split=max(assigned,key=lambda s:(target[s]-len(assigned[s]))/target[s])
+        assigned[split].extend(group)
+    if any(not assigned[s] for s in assigned):
+        raise RuntimeError(f"Split kosong: { {k: len(v) for k,v in assigned.items()} }. Data/grup terlalu sedikit; periksa --group-regex.")
+    splits={s:[records[i] for i in ids] for s,ids in assigned.items()}
     if dst.exists() and args.overwrite: shutil.rmtree(dst)
     for split,items in splits.items():
         for img,rows in items:
@@ -122,7 +152,18 @@ def main():
     import yaml
     data={'path':dst.as_posix(),'train':'images/train','val':'images/val','test':'images/test','names':{i:n for i,n in enumerate(names)}}
     config.write_text(yaml.safe_dump(data,sort_keys=False,allow_unicode=True),encoding='utf-8')
-    summary={'source':str(src),'output':str(dst),'seed':args.seed,'ratios':args.ratios,'images':{k:len(v) for k,v in splits.items()},'classes':names,'objects_per_class_total':{names[k]:v for k,v in sorted(perclass.items())},'format':'YOLO detection class_id cx cy w h converted from polygon enclosing boxes','note':'split acak per gambar; jika beberapa gambar adalah frame dari adegan/video sama, gunakan group split untuk menghindari leakage.'}
+    manifest=[]
+    for split,items in splits.items():
+        for img,_ in items:
+            group=img.stem
+            if rx:
+                match=rx.search(img.stem)
+                if match: group=match.group(1) if match.groups() else match.group(0)
+            manifest.append((img.relative_to(src/'images').as_posix(),group,split))
+    import csv
+    with (dst/'split_manifest.csv').open('w',newline='',encoding='utf-8') as f:
+        writer=csv.writer(f); writer.writerow(['image','group','split']); writer.writerows(manifest)
+    summary={'source':str(src),'output':str(dst),'seed':args.seed,'ratios_requested':args.ratios,'group_regex':args.group_regex,'groups':len(groups),'images':{k:len(v) for k,v in splits.items()},'classes':names,'objects_per_class_total':{names[k]:v for k,v in sorted(perclass.items())},'format':'YOLO detection class_id cx cy w h converted from polygon enclosing boxes','split_policy':'identical image hashes and optional filename groups are kept in one split'}
     (dst/'split_summary.json').write_text(json.dumps(summary,indent=2,ensure_ascii=False),encoding='utf-8')
     print(json.dumps(summary,indent=2,ensure_ascii=False)); print(f'\n[OK] data.yaml dibuat: {config}')
     return 0
