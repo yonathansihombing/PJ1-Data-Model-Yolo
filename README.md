@@ -1,3 +1,6 @@
+**Nama:Yonatan Andreas
+NIM:4222411028**
+
 # YOLO Object Detection — Dataset, Training, dan Evaluasi
 
 ## 1. Ruang lingkup
