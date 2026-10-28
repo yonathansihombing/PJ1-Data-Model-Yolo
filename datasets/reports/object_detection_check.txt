@@ -1,0 +1,18 @@
+======================================================================
+LAPORAN DATASET: C:\Users\hp\Downloads\camera\datasets\object_detection
+======================================================================
+Gambar                : 90  per split: {'test': 9, 'train': 63, 'val': 18}
+Gambar latar (label kosong): 0
+Jumlah kotak per kelas:
+  field         :     30  ( 33.3% dari semua kotak)
+  box_hitam     :     30  ( 33.3% dari semua kotak)
+  box_putih     :     30  ( 33.3% dari semua kotak)
+Kotak per kelas per split:
+  test  : {'box_hitam': 5, 'box_putih': 2, 'field': 2}
+  train : {'box_hitam': 18, 'box_putih': 25, 'field': 20}
+  val   : {'box_hitam': 7, 'box_putih': 3, 'field': 8}
+Rasio kelas terbanyak / tersedikit: 1.0x
+Tidak ada kelas dengan jumlah <= 1/3 kelas terbanyak.
+Gambar identik: 0 grup (lintas split: 0)
+Sidik jari label: 6DAE1F8ECE06
+ERROR: 0   WARNING: 0

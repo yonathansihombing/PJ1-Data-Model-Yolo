@@ -1,0 +1,4 @@
+class_id,class,precision,recall,ap50,ap50_95
+0,field,0.9935,1.0,0.995,0.945
+1,box_hitam,0.8144,0.8,0.92,0.8079
+2,box_putih,0.9766,1.0,0.995,0.995

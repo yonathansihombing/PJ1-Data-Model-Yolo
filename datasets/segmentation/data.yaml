@@ -1,0 +1,9 @@
+path: datasets/segmentation
+train: images/train
+val: images/val
+test: images/test
+names:
+  0: field
+  1: box_hitam
+  2: box_putih
+nc: 3

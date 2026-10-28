@@ -1,9 +1,8 @@
-# Dibuat otomatis oleh prepare_polygon_detection.py berdasarkan classes.txt.
-# Jangan gunakan path relatif di sini; skrip akan menulis path final saat split.
 path: datasets/object_detection
 train: images/train
 val: images/val
 test: images/test
+
 names:
   0: field
   1: box_hitam

@@ -1,0 +1,27 @@
+{
+  "source": "C:\\Users\\hp\\Downloads\\camera\\datasets\\raw_yolo",
+  "output": "C:\\Users\\hp\\Downloads\\camera\\datasets\\object_detection",
+  "seed": 42,
+  "ratios": [
+    0.7,
+    0.2,
+    0.1
+  ],
+  "images": {
+    "train": 63,
+    "val": 18,
+    "test": 9
+  },
+  "classes": [
+    "field",
+    "box_hitam",
+    "box_putih"
+  ],
+  "objects_per_class_total": {
+    "field": 30,
+    "box_hitam": 30,
+    "box_putih": 30
+  },
+  "format": "YOLO detection class_id cx cy w h converted from polygon enclosing boxes",
+  "note": "split acak per gambar; jika beberapa gambar adalah frame dari adegan/video sama, gunakan group split untuk menghindari leakage."
+}

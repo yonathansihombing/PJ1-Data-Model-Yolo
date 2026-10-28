@@ -1,0 +1,46 @@
+{
+  "root": "C:\\Users\\hp\\Downloads\\camera\\datasets\\object_detection",
+  "classes": [
+    "field",
+    "box_hitam",
+    "box_putih"
+  ],
+  "images": 90,
+  "images_per_split": {
+    "test": 9,
+    "train": 63,
+    "val": 18
+  },
+  "empty_labels_background": 0,
+  "objects_per_class": {
+    "field": 30,
+    "box_hitam": 30,
+    "box_putih": 30
+  },
+  "objects_per_class_per_split": {
+    "test": {
+      "box_hitam": 5,
+      "box_putih": 2,
+      "field": 2
+    },
+    "train": {
+      "box_hitam": 18,
+      "box_putih": 25,
+      "field": 20
+    },
+    "val": {
+      "box_hitam": 7,
+      "box_putih": 3,
+      "field": 8
+    }
+  },
+  "largest_over_smallest_class_ratio": 1.0,
+  "minor_classes": [],
+  "duplicate_image_groups": 0,
+  "cross_split_duplicate_groups": 0,
+  "num_errors": 0,
+  "num_warnings": 0,
+  "errors": [],
+  "warnings": [],
+  "label_fingerprint": "6DAE1F8ECE06"
+}

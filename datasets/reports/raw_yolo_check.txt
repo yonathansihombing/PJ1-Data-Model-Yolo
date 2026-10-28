@@ -1,0 +1,105 @@
+======================================================================
+LAPORAN DATASET: C:\Users\hp\Downloads\camera\datasets\raw_yolo
+======================================================================
+Gambar                : 90  per split: {'all': 90}
+Gambar latar (label kosong): 0
+Jumlah kotak per kelas:
+  field         :      0  (  0.0% dari semua kotak)
+  box_hitam     :      0  (  0.0% dari semua kotak)
+  box_putih     :      0  (  0.0% dari semua kotak)
+Gambar identik: 0 grup (lintas split: 0)
+Sidik jari label: None
+ERROR: 90   WARNING: 3
+  [ERROR] IMG_20261023_231612.jpg: tidak ada file label (IMG_20261023_231612.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231615.jpg: tidak ada file label (IMG_20261023_231615.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231618.jpg: tidak ada file label (IMG_20261023_231618.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231621.jpg: tidak ada file label (IMG_20261023_231621.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231623.jpg: tidak ada file label (IMG_20261023_231623.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231626.jpg: tidak ada file label (IMG_20261023_231626.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231629.jpg: tidak ada file label (IMG_20261023_231629.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231631.jpg: tidak ada file label (IMG_20261023_231631.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231634.jpg: tidak ada file label (IMG_20261023_231634.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231636.jpg: tidak ada file label (IMG_20261023_231636.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231640.jpg: tidak ada file label (IMG_20261023_231640.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231643.jpg: tidak ada file label (IMG_20261023_231643.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231645.jpg: tidak ada file label (IMG_20261023_231645.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231647.jpg: tidak ada file label (IMG_20261023_231647.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231655.jpg: tidak ada file label (IMG_20261023_231655.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231659.jpg: tidak ada file label (IMG_20261023_231659.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231702.jpg: tidak ada file label (IMG_20261023_231702.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231704.jpg: tidak ada file label (IMG_20261023_231704.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231708.jpg: tidak ada file label (IMG_20261023_231708.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231710.jpg: tidak ada file label (IMG_20261023_231710.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231722.jpg: tidak ada file label (IMG_20261023_231722.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231725.jpg: tidak ada file label (IMG_20261023_231725.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231727.jpg: tidak ada file label (IMG_20261023_231727.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231730.jpg: tidak ada file label (IMG_20261023_231730.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231733.jpg: tidak ada file label (IMG_20261023_231733.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231736.jpg: tidak ada file label (IMG_20261023_231736.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231752.jpg: tidak ada file label (IMG_20261023_231752.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231754.jpg: tidak ada file label (IMG_20261023_231754.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231757.jpg: tidak ada file label (IMG_20261023_231757.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231804.jpg: tidak ada file label (IMG_20261023_231804.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231903.jpg: tidak ada file label (IMG_20261023_231903.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231907.jpg: tidak ada file label (IMG_20261023_231907.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231909.jpg: tidak ada file label (IMG_20261023_231909.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231911.jpg: tidak ada file label (IMG_20261023_231911.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231913.jpg: tidak ada file label (IMG_20261023_231913.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231916.jpg: tidak ada file label (IMG_20261023_231916.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231919.jpg: tidak ada file label (IMG_20261023_231919.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231922.jpg: tidak ada file label (IMG_20261023_231922.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231924.jpg: tidak ada file label (IMG_20261023_231924.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231927.jpg: tidak ada file label (IMG_20261023_231927.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231931.jpg: tidak ada file label (IMG_20261023_231931.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231933.jpg: tidak ada file label (IMG_20261023_231933.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231935.jpg: tidak ada file label (IMG_20261023_231935.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231937.jpg: tidak ada file label (IMG_20261023_231937.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231940.jpg: tidak ada file label (IMG_20261023_231940.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231943.jpg: tidak ada file label (IMG_20261023_231943.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231945.jpg: tidak ada file label (IMG_20261023_231945.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231947.jpg: tidak ada file label (IMG_20261023_231947.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231952.jpg: tidak ada file label (IMG_20261023_231952.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231954.jpg: tidak ada file label (IMG_20261023_231954.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231957.jpg: tidak ada file label (IMG_20261023_231957.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_232001.jpg: tidak ada file label (IMG_20261023_232001.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_232006.jpg: tidak ada file label (IMG_20261023_232006.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_232010.jpg: tidak ada file label (IMG_20261023_232010.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_232013.jpg: tidak ada file label (IMG_20261023_232013.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_232023.jpg: tidak ada file label (IMG_20261023_232023.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_232026.jpg: tidak ada file label (IMG_20261023_232026.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_232028.jpg: tidak ada file label (IMG_20261023_232028.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_232031.jpg: tidak ada file label (IMG_20261023_232031.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_232032.jpg: tidak ada file label (IMG_20261023_232032.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231139.jpg: tidak ada file label (IMG_20261023_231139.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231147.jpg: tidak ada file label (IMG_20261023_231147.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231154.jpg: tidak ada file label (IMG_20261023_231154.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231159.jpg: tidak ada file label (IMG_20261023_231159.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231202.jpg: tidak ada file label (IMG_20261023_231202.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231218.jpg: tidak ada file label (IMG_20261023_231218.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231226.jpg: tidak ada file label (IMG_20261023_231226.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231236.jpg: tidak ada file label (IMG_20261023_231236.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231240.jpg: tidak ada file label (IMG_20261023_231240.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231246.jpg: tidak ada file label (IMG_20261023_231246.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231250.jpg: tidak ada file label (IMG_20261023_231250.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231253.jpg: tidak ada file label (IMG_20261023_231253.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231256.jpg: tidak ada file label (IMG_20261023_231256.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231300.jpg: tidak ada file label (IMG_20261023_231300.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231303.jpg: tidak ada file label (IMG_20261023_231303.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231305.jpg: tidak ada file label (IMG_20261023_231305.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231308.jpg: tidak ada file label (IMG_20261023_231308.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231312.jpg: tidak ada file label (IMG_20261023_231312.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231316.jpg: tidak ada file label (IMG_20261023_231316.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231319.jpg: tidak ada file label (IMG_20261023_231319.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231321.jpg: tidak ada file label (IMG_20261023_231321.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231326.jpg: tidak ada file label (IMG_20261023_231326.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231329.jpg: tidak ada file label (IMG_20261023_231329.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231341.jpg: tidak ada file label (IMG_20261023_231341.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231348.jpg: tidak ada file label (IMG_20261023_231348.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231450.jpg: tidak ada file label (IMG_20261023_231450.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231453.jpg: tidak ada file label (IMG_20261023_231453.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231457.jpg: tidak ada file label (IMG_20261023_231457.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231528.jpg: tidak ada file label (IMG_20261023_231528.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [ERROR] IMG_20261023_231534.jpg: tidak ada file label (IMG_20261023_231534.txt); gambar tanpa objek harus punya file .txt KOSONG
+  [WARNING] kelas 'field' tidak punya satu pun kotak di dataset ini
+  [WARNING] kelas 'box_hitam' tidak punya satu pun kotak di dataset ini
+  [WARNING] kelas 'box_putih' tidak punya satu pun kotak di dataset ini

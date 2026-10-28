@@ -1,0 +1,14 @@
+Letakkan foto langsung di folder ini atau buat subfolder berdasarkan nama kelas.
+Contoh:
+images/
+  field/       -> otomatis dipilih sebagai kelas default "field"
+    foto1.jpg
+  box_hitam/   -> otomatis dipilih sebagai kelas default "box_hitam"
+    foto2.jpg
+  box_putih/   -> otomatis dipilih sebagai kelas default "box_putih"
+    foto3.jpg
+
+Jalankan python main.py -> menu [9] -> [2].
+Pilih mode AABB/OBB, lalu pilih folder yang ingin dianotasi.
+Jika nama folder belum ada di daftar kelas, program akan menawarkan menambahkannya.
+Label final disimpan terpisah untuk AABB dan OBB.
