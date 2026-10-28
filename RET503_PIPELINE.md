@@ -65,13 +65,3 @@ Project camera menyimpan anotasi Polygon/segmentation (`datasets/raw_yolo/labels
    ```
    Untuk uji round-trip yang kuat, konversi JSON tersebut kembali ke folder dataset sementara lalu bandingkan jumlah objek dan koordinat (toleransi pembulatan). Jangan menimpa dataset sumber.
 
-## Hasil eksperimen yang harus dikumpulkan
-
-Simpan output asli dari pelatihan, jangan dibuat manual: `runs/e1_pretrained/`, `runs/e2_scratch/`, `runs/e3_finetuning/` termasuk `weights/best.pt`, `weights/last.pt`, `results.csv`, grafik, confusion matrix, `args.yaml`, `experiment_meta.json`; serta file evaluasi `runs/summary_val.csv`, tabel perbandingan dan `runs/final_test.json`/`.csv` (nama aktual mengikuti `evaluate_yolo.py`). Tambahkan screenshot log terminal dan catat versi Python, Ultralytics, PyTorch, hardware, durasi, seed dan jumlah data.
-
-## Batasan yang harus dinyatakan di laporan
-
-- ZIP template tidak menyertakan foto pribadi, label final, checkpoint hasil training, atau metrik eksperimen karena semua itu harus berasal dari dataset/komputer pengguna dan eksperimen yang benar-benar dijalankan.
-- Jika instruksi PPT mewajibkan 200 gambar per kelas dan tiga kelas COCO, dataset 90 gambar `field`, `box_hitam`, `box_putih` **belum memenuhi syarat tersebut**. Perlu dataset sesuai pilihan kelas COCO dan jumlah target yang diwajibkan; jangan mengklaim terpenuhi hanya karena pipeline bisa dijalankan.
-- Split acak per gambar sesuai skrip. Jika foto berurutan dari video/adegan yang sama, gunakan split berbasis grup untuk mencegah kebocoran data antar split.
-- E1/E2/E3 harus benar-benar dijalankan. Berkas konfigurasi dan kode bukan bukti bahwa training sukses atau bahwa model punya metrik tertentu.

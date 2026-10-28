@@ -1,0 +1,75 @@
+{
+  "experiment": "e3",
+  "name": "e3_finetuning",
+  "description": "E3 - baseline E1 dengan satu perubahan hyperparameter: learning rate awal lr0 dari 0.01 menjadi 0.005.",
+  "model_reference": "C:\\Users\\hp\\Downloads\\camera\\weights\\yolo26n.pt",
+  "pretrained": true,
+  "train_config": {
+    "epochs": 50,
+    "imgsz": 640,
+    "batch": 8,
+    "seed": 42,
+    "workers": 4,
+    "device": null,
+    "patience": 15,
+    "optimizer": "auto",
+    "lr0": 0.005,
+    "lrf": 0.01,
+    "momentum": 0.937,
+    "weight_decay": 0.0005,
+    "warmup_epochs": 3.0,
+    "hsv_h": 0.015,
+    "hsv_s": 0.7,
+    "hsv_v": 0.4,
+    "degrees": 0.0,
+    "translate": 0.1,
+    "scale": 0.5,
+    "fliplr": 0.5,
+    "flipud": 0.0,
+    "mosaic": 1.0,
+    "close_mosaic": 10,
+    "plots": true,
+    "save": true,
+    "val": true
+  },
+  "cli_overrides": {},
+  "e3_diff_vs_e1": {
+    "train.lr0": [
+      0.01,
+      0.005
+    ]
+  },
+  "data_yaml": "C:\\Users\\hp\\Downloads\\camera\\outputs\\resolved_data.yaml",
+  "classes": [
+    "field",
+    "box_hitam",
+    "box_putih"
+  ],
+  "dataset_counts": {
+    "train": {
+      "images": 63,
+      "labels": 63
+    },
+    "val": {
+      "images": 18,
+      "labels": 18
+    },
+    "test": {
+      "images": 9,
+      "labels": 9
+    }
+  },
+  "dataset_fingerprint": "6DAE1F8ECE06",
+  "started": "2026-10-26 18:10:03",
+  "finished": "2026-10-26 18:13:14",
+  "train_minutes": 3.2,
+  "environment": {
+    "python": "3.14.6",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "ultralytics": "8.4.189",
+    "torch": "2.14.1+cu126",
+    "opencv": "5.0.0.93"
+  },
+  "config_source": "C:\\Users\\hp\\Downloads\\camera\\configs\\e3_finetuning.yaml",
+  "command": "train_yolo.py --exp e3"
+}
